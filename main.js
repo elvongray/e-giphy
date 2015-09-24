@@ -1,5 +1,6 @@
 var BrowserWindow = require('browser-window');
 var menubar = require('menubar');
+
 mbar = menubar({
   dir           : __dirname + '/app',
   preloadWindow : true,
@@ -10,7 +11,7 @@ mbar = menubar({
 
 require('crash-reporter').start();
 
-var debug = process.env.NODE_ENV === 'development'
+var debug = process.env.NODE_ENV === 'development';
 
 
 mbar.on('ready', function() {
@@ -28,3 +29,12 @@ mbar.on('ready', function() {
   }
 
 });
+
+/*
+* Send event to load giphys when
+* menu is shown
+*/
+mbar.on('show', function() {
+  var webContents = mbar.window.webContents;
+  webContents.send('message', 'load-giphys');
+})
