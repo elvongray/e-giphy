@@ -1,12 +1,32 @@
 var React = require('react');
 var ipc = window.require('ipc');
+require('../css/style.css');
 
 var Giphy = React.createClass({
-  componentWillMount: function() {
-    console.log(ipc);
-  },
+
   render: function() {
-    return <div>Is it still working</div>
+
+    return (
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header className="mdl-layout__header header-style">
+          <div className="mdl-layout__header-row header-content-style">
+            <span className="mdl-layout-title">GIPHY</span>
+          </div>
+        </header>
+        <main className="mdl-layout__content">
+          <div className="page-content">
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--12-col giphy-view">
+                maiason renderer
+              </div>
+              <div className="mdl-cell mdl-cell--12-col search-bar">
+                search renderer
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
   }
 })
 

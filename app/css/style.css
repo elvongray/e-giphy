@@ -1,0 +1,24 @@
+body {
+  background-color: black;
+}
+.header-style {
+  background-color: black;
+}
+
+.header-content-style span {
+  font-weight: bold;
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.giphy-view {
+  height: 450px;
+  background-color: lightblue;
+}
+
+.search-bar {
+  height: 50px;
+  background-color: lightblue;
+}

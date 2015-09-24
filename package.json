@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "electron-prebuilt": "^0.28.3",
+    "material-design-lite": "^1.0.4",
     "menubar": "^2.2.1",
     "react": "^0.13.3"
   },
