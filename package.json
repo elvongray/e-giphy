@@ -24,10 +24,12 @@
   },
   "dependencies": {
     "electron-prebuilt": "^0.28.3",
+    "flux": "^2.0.0",
+    "giphy-api": "^1.0.8",
     "masonry-layout": "^3.3.2",
     "material-design-lite": "^1.0.4",
     "menubar": "^2.2.1",
-    "packery": "^1.4.3",
+    "object-assign": "^1.0.0",
     "react": "^0.13.3"
   },
   "author": "Arinde Eniola",
