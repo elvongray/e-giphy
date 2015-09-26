@@ -26,7 +26,7 @@ var Giphy = React.createClass({
                 <GiphyView />
               </div>
               <div className="mdl-cell mdl-cell--12-col search-bar">
-                search renderer
+                <SearchBar />
               </div>
             </div>
           </div>

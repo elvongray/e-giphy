@@ -6,9 +6,9 @@ var SearchBar = React.createClass({
   render: function() {
 
     return (
-      <div class="search-bar">
-        <input type="text" placeholder="Search for Gifs"/>
-        <span> </span>
+      <div className="mdl-grid search-contents">
+        <input type="text" className="search-input" placeholder="Search for Gifs"/>
+        <input type="image" className="search-button" src="../app/assets/search.png" />
       </div>
     );
   }

@@ -5,6 +5,8 @@ require('../../css/style.css');
 var GiphyView = React.createClass({
 
   componentDidMount: function() {
+    //check if the giphy plane has been loaded
+    //and apply the masonry stayle to it.
     var elem = React.findDOMNode(this);
     var msnry = new Masonry(elem, {
       itemSelector: '.grid-item',
