@@ -22,6 +22,13 @@ var Giphy = React.createClass({
     });
   },
 
+  handleSubmit: function(refs) {
+    if(React.findDOMNode(refs).value) {
+      this.setState({giphys: []});
+      GiphyActions.searchForRequestedGiphys(React.findDOMNode(refs).value);
+    }
+  },
+
   componentDidMount: function() {
     GiphyStore.addLoadGiphysListener(this.loadGiphys)
   },
@@ -48,7 +55,7 @@ var Giphy = React.createClass({
                   <GiphyView giphys={this.state.giphys} />
                 </div>
                 <div className="mdl-cell mdl-cell--12-col search-bar">
-                  <SearchBar />
+                  <SearchBar handleSearch={this.handleSubmit}/>
                 </div>
               </div>
             </div>

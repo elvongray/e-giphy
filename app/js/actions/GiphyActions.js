@@ -29,6 +29,24 @@ var GiphyActions = {
     else {
       AppDispatcher.dispatch(action(loadedGiphys));
     }
+  },
+
+  searchForRequestedGiphys: function(searchTerm) {
+     var action = function(payload) {
+      return {
+        actionType: "LOAD_SEARCHED_GIPHYS",
+        data: payload
+      }
+    }
+
+    giphy.search({
+      q: searchTerm,
+      limit: 25,
+      rating: 'g',
+      fmt: 'json'
+    },function(err, res) {
+      AppDispatcher.dispatch(action(res.data));
+    });
   }
 }
 

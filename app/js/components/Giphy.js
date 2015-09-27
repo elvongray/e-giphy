@@ -11,7 +11,7 @@ var Giphy = React.createClass({
   render: function() {
 
     return (
-      <img src={this.props.src.fixed_height.url} onClick={this.copyLikeToCliboard} className="giphy-image"/>
+      <img src={this.props.src.fixed_height_downsampled.url} onClick={this.copyLikeToCliboard} className="giphy-image"/>
     );
   }
 });

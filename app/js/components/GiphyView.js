@@ -7,7 +7,6 @@ require('../../css/style.css');
 var GiphyView = React.createClass({
 
   addMasonryLayout: function() {
-    console.log("called again again");
     var elem = document.querySelector('.grid');
     var msnry = new Masonry(elem, {
       itemSelector: '.grid-item',

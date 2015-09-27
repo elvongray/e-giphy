@@ -29,6 +29,11 @@ AppDispatcher.register(function(action) {
         GiphyStore.emitLoadGiphys();
         break;
 
+      case "LOAD_SEARCHED_GIPHYS":
+        giphys = action.data;
+        GiphyStore.emitLoadGiphys();
+        break;
+
       default:
         console.log("error");
   }
