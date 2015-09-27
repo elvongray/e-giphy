@@ -1,4 +1,5 @@
 var React = require('react');
+var GiphyStore = require('./stores/GiphyStore');
 
 var GiphyView = require('./components/GiphyView');
 var SearchBar = require('./components/SearchBar');
@@ -8,6 +9,14 @@ var ipc = window.require('ipc');
 require('../css/style.css');
 
 var Giphy = React.createClass({
+
+  loadGiphys: function() {
+    return GiphyStore.getGiphys();
+  },
+
+  componentDidMount: function() {
+    GiphyStore.addLoadGiphysListener(this.loadGiphys)
+  },
 
   render: function() {
 
@@ -25,7 +34,7 @@ var Giphy = React.createClass({
             <div className="page-content">
               <div className="mdl-grid">
                 <div className="mdl-cell mdl-cell--12-col giphy-view">
-                  <GiphyView />
+                  <GiphyView giphys={this.loadGiphys} />
                 </div>
                 <div className="mdl-cell mdl-cell--12-col search-bar">
                   <SearchBar />
