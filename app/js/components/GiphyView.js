@@ -1,34 +1,46 @@
 var React = require('react');
-var Masonry = require('masonry-layout')
+var Masonry = require('masonry-layout');
+var imagesLoaded = require('imagesloaded');
 var Giphy = require('./Giphy');
 require('../../css/style.css');
 
 var GiphyView = React.createClass({
 
-  componentDidMount: function() {
-    //check if the giphy plane has been loaded
-    //and apply the masonry stayle to it.
-    var elem = React.findDOMNode(this);
-    var msnry = new Masonry(elem, {
-      itemSelector: '.grid-item',
-      columnWidth: 10,
-      gutter: 30
-    })
+  addMasonryLayout: function() {
+    imagesLoaded('.giphy-view', function() {
+      console.log("called again again");
+      var msnry = new Masonry('.grid', {
+        itemSelector: '.grid-item',
+        columnWidth: 10,
+        gutter: 30
+      });
+    });
   },
 
   render: function() {
-    console.log(this.props.giphys);
-    var gif = ""
-    if(this.props.giphys.length) {
-      gif = this.props.giphys[0].images.fixed_height.url;
-    }
-    return (
-      <div className="grid">
-        <div className="grid-item">
-          <Giphy src={gif} />
+
+    if(!this.props.giphys.length) {
+      return (
+        <div className="load8">
+          <div className="loader">Loading...</div>
         </div>
-      </div>
-    );
+      );
+    }
+    else {
+      var gifs = this.props.giphys.map(function(gif, index) {
+        return (
+          <div className="grid-item" key={'giphy-' + index}>
+            <Giphy src={gif.images.fixed_height.url}/>
+          </div>
+        )
+      });
+      this.addMasonryLayout();
+      return (
+        <div className="grid">
+          {gifs}
+        </div>
+      );
+    }
   }
 });
 

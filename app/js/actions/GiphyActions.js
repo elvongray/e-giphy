@@ -18,7 +18,7 @@ var GiphyActions = {
 
     if(loadedGiphys.length === 0) {
       giphy.trending({
-        limit: 1,
+        limit: 25,
         rating: 'g',
         fmt: 'json'
       },function(err, res) {
