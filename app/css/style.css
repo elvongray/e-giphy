@@ -31,7 +31,7 @@ body {
 .search-input {
   width: 94%;
   height: 30px;
-  font-family: sans-serif;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 18px;
   appearance: none;
   box-shadow: none;
@@ -79,6 +79,17 @@ body {
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
   border-radius: 5px;
+}
+
+.help-text{
+  color: white;
+  background:rgba(255,255,255,0.1);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.help-text span {
+  position: relative;
+  left: 80px;
 }
 
 

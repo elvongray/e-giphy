@@ -42,6 +42,9 @@ var Giphy = React.createClass({
             <div className="page-content">
               <div className="mdl-grid">
                 <div className="mdl-cell mdl-cell--12-col giphy-view">
+                  <div className="help-text">
+                    <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
+                  </div>
                   <GiphyView giphys={this.state.giphys} />
                 </div>
                 <div className="mdl-cell mdl-cell--12-col search-bar">
