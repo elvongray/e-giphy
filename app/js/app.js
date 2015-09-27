@@ -10,8 +10,16 @@ require('../css/style.css');
 
 var Giphy = React.createClass({
 
+  getInitialState: function() {
+    return {
+      giphys: []
+    }
+  },
+
   loadGiphys: function() {
-    return GiphyStore.getGiphys();
+    this.setState({
+      giphys:GiphyStore.getGiphys()
+    });
   },
 
   componentDidMount: function() {
@@ -34,7 +42,7 @@ var Giphy = React.createClass({
             <div className="page-content">
               <div className="mdl-grid">
                 <div className="mdl-cell mdl-cell--12-col giphy-view">
-                  <GiphyView giphys={this.loadGiphys} />
+                  <GiphyView giphys={this.state.giphys} />
                 </div>
                 <div className="mdl-cell mdl-cell--12-col search-bar">
                   <SearchBar />

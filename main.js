@@ -12,7 +12,7 @@ mbar = menubar({
 require('crash-reporter').start();
 
 var debug = process.env.NODE_ENV === 'development';
-
+var debugWindow;
 
 mbar.on('ready', function() {
 
@@ -34,4 +34,7 @@ mbar.on('ready', function() {
 mbar.on('show', function() {
   var webContents = mbar.window.webContents;
   webContents.send('message', 'load-giphys');
+  if(debug) {
+    debugWindow.webContents.send('message', 'load-giphys');
+  }
 })

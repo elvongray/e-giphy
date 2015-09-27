@@ -1,5 +1,6 @@
 var React = require('react');
 var Masonry = require('masonry-layout')
+var Giphy = require('./Giphy');
 require('../../css/style.css');
 
 var GiphyView = React.createClass({
@@ -16,32 +17,16 @@ var GiphyView = React.createClass({
   },
 
   render: function() {
-
+    console.log(this.props.giphys);
+    var gif = ""
+    if(this.props.giphys.length) {
+      gif = this.props.giphys[0].images.fixed_height.url;
+    }
     return (
       <div className="grid">
-        <div className="grid-item"></div>
-        <div className="grid-item grid-ite--width2 grid-item--height2"></div>
-        <div className="grid-item grid-item--height3"></div>
-        <div className="grid-item grid-item--height2"></div>
-        <div className="grid-item grid-item--width3"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--height2"></div>
-        <div className="grid-item grid-item--width2 grid-item--height3"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--height2"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--width2 grid-item--height2"></div>
-        <div className="grid-item grid-item--width2"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--height2"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--height3"></div>
-        <div className="grid-item grid-item--height2"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item grid-item--height2"></div>
+        <div className="grid-item">
+          <Giphy src={gif} />
+        </div>
       </div>
     );
   }
