@@ -1,12 +1,17 @@
 var React = require('react');
+var clipboard = window.require('clipboard');
 require('../../css/style.css');
 
 var Giphy = React.createClass({
 
+  copyLikeToCliboard: function() {
+    clipboard.writeText(this.props.src.original.url);
+  },
+
   render: function() {
 
     return (
-      <img src={this.props.src} alt="" className="giphy-image"/>
+      <img src={this.props.src.fixed_height.url} onClick={this.copyLikeToCliboard} className="giphy-image"/>
     );
   }
 });

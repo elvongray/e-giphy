@@ -7,18 +7,24 @@ require('../../css/style.css');
 var GiphyView = React.createClass({
 
   addMasonryLayout: function() {
+    console.log("called again again");
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry(elem, {
+      itemSelector: '.grid-item',
+      columnWidth: 10,
+      gutter: 30
+    });
+
     imagesLoaded('.giphy-view', function() {
-      console.log("called again again");
-      var msnry = new Masonry('.grid', {
-        itemSelector: '.grid-item',
-        columnWidth: 10,
-        gutter: 30
-      });
+      msnry.layout();
     });
   },
 
   render: function() {
-
+    /*
+    * Check if the giphys are ready. If not show spinner
+    * else show giphys
+    */
     if(!this.props.giphys.length) {
       return (
         <div className="load8">
@@ -30,11 +36,16 @@ var GiphyView = React.createClass({
       var gifs = this.props.giphys.map(function(gif, index) {
         return (
           <div className="grid-item" key={'giphy-' + index}>
-            <Giphy src={gif.images.fixed_height.url}/>
+            <Giphy src={gif.images}/>
           </div>
         )
       });
-      this.addMasonryLayout();
+
+      //This is bad, find a better way
+      setTimeout(function() {
+        this.addMasonryLayout()
+      }.bind(this), 1000);
+
       return (
         <div className="grid">
           {gifs}
