@@ -40,10 +40,10 @@ var GiphyView = React.createClass({
         )
       });
 
-      //This is bad, find a better way
+      //This is bad, find a better way!
       setTimeout(function() {
         this.addMasonryLayout()
-      }.bind(this), 1000);
+      }.bind(this), 500);
 
       return (
         <div className="grid">

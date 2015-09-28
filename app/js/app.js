@@ -8,7 +8,7 @@ var GiphyActions = require('./actions/GiphyActions');
 var ipc = window.require('ipc');
 require('../css/style.css');
 
-var Giphy = React.createClass({
+var EGiphy = React.createClass({
 
   getInitialState: function() {
     return {
@@ -23,7 +23,9 @@ var Giphy = React.createClass({
   },
 
   handleSubmit: function(refs) {
-    if(React.findDOMNode(refs).value) {
+    var searchValue = React.findDOMNode(refs).value;
+    console.log(searchValue);
+    if(/^\w+\s*\w+$/.test(searchValue)) {
       this.setState({giphys: []});
       GiphyActions.searchForRequestedGiphys(React.findDOMNode(refs).value);
     }
@@ -72,4 +74,4 @@ ipc.on('message', function(message) {
   }
 });
 
-React.render(<Giphy />, document.getElementById('giphy'));
+React.render(<EGiphy />, document.getElementById('giphy'));
