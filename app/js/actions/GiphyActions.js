@@ -18,7 +18,7 @@ var GiphyActions = {
 
     if(loadedGiphys.length === 0) {
       giphy.trending({
-        limit: 25,
+        limit: 50,
         rating: 'g',
         fmt: 'json'
       },function(err, res) {
@@ -32,6 +32,7 @@ var GiphyActions = {
   },
 
   searchForRequestedGiphys: function(searchTerm) {
+
      var action = function(payload) {
       return {
         actionType: "LOAD_SEARCHED_GIPHYS",
@@ -41,12 +42,19 @@ var GiphyActions = {
 
     giphy.search({
       q: searchTerm,
-      limit: 25,
+      limit: 50,
       rating: 'g',
       fmt: 'json'
     },function(err, res) {
       AppDispatcher.dispatch(action(res.data));
     });
+  },
+
+  showConnectionError: function() {
+    var action =  {
+      actionType: "NO_INTERNET_CONNECTION"
+    }
+    AppDispatcher.dispatch(action);
   }
 }
 

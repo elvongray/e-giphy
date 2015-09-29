@@ -1,30 +1,39 @@
-var React = require('react');
-var GiphyStore = require('./stores/GiphyStore');
+var ipc = window.require('ipc');
+var isOnline = window.require('is-online');
 
+var React = require('react');
+
+var GiphyStore = require('./stores/GiphyStore');
 var GiphyView = require('./components/GiphyView');
 var SearchBar = require('./components/SearchBar');
 var GiphyActions = require('./actions/GiphyActions');
 
-var ipc = window.require('ipc');
 require('../css/style.css');
 
 var EGiphy = React.createClass({
 
   getInitialState: function() {
     return {
-      giphys: []
+      giphys: [],
+      connection: true
     }
   },
 
   loadGiphys: function() {
     this.setState({
-      giphys:GiphyStore.getGiphys()
+      giphys:GiphyStore.getGiphys(),
+      connection: true
+    });
+  },
+
+  noConnection: function() {
+    this.setState({
+      connection: false
     });
   },
 
   handleSubmit: function(refs) {
     var searchValue = React.findDOMNode(refs).value;
-    console.log(searchValue);
     if(/^\w+\s*\w+$/.test(searchValue)) {
       this.setState({giphys: []});
       GiphyActions.searchForRequestedGiphys(React.findDOMNode(refs).value);
@@ -32,10 +41,31 @@ var EGiphy = React.createClass({
   },
 
   componentDidMount: function() {
-    GiphyStore.addLoadGiphysListener(this.loadGiphys)
+    GiphyStore.addLoadGiphysListener(this.loadGiphys);
+    GiphyStore.addNoConnectionListener(this.noConnection);
   },
 
   render: function() {
+    var display;
+    if(this.state.connection) {
+      display = (
+        <div className="mdl-cell mdl-cell--12-col giphy-view">
+           <div className="help-text">
+              <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
+            </div>
+          <GiphyView giphys={this.state.giphys} />
+        </div>
+      )
+    }
+    else {
+      display = (
+        <div className="mdl-cell mdl-cell--12-col giphy-view">
+          <div className="help-text">
+            <span>NO INTERNET CONNECTION</span>
+          </div>
+        </div>
+      )
+    }
 
     return (
       <div className="mdl-layout__container">
@@ -50,12 +80,7 @@ var EGiphy = React.createClass({
           <main className="mdl-layout__content">
             <div className="page-content">
               <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col giphy-view">
-                  <div className="help-text">
-                    <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
-                  </div>
-                  <GiphyView giphys={this.state.giphys} />
-                </div>
+                  {display}
                 <div className="mdl-cell mdl-cell--12-col search-bar">
                   <SearchBar handleSearch={this.handleSubmit}/>
                 </div>
@@ -68,10 +93,21 @@ var EGiphy = React.createClass({
   }
 })
 
+// listen for event to load trending gipys
+// when the menu is displayed
 ipc.on('message', function(message) {
   if(message === 'load-giphys') {
-    GiphyActions.loadTrendingGiphys();
+    //check if ther is internet connection
+    isOnline(function(err, online) {
+      if(online){
+        GiphyActions.loadTrendingGiphys();
+      }
+      else{
+        GiphyActions.showConnectionError();
+      }
+    });
   }
 });
+
 
 React.render(<EGiphy />, document.getElementById('giphy'));
