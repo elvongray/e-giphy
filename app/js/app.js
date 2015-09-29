@@ -97,7 +97,7 @@ var EGiphy = React.createClass({
 // when the menu is displayed
 ipc.on('message', function(message) {
   if(message === 'load-giphys') {
-    //check if ther is internet connection
+    //check if there is internet connection
     isOnline(function(err, online) {
       if(online){
         GiphyActions.loadTrendingGiphys();

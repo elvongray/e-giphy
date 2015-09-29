@@ -2,6 +2,7 @@ var BrowserWindow = require('browser-window');
 var menubar = require('menubar');
 
 mbar = menubar({
+  icon          : __dirname + '/app/assets/giphy_icon.png',
   dir           : __dirname + '/app',
   preloadWindow : true,
   width         : 500,
