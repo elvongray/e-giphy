@@ -8,14 +8,14 @@ var GiphyView = React.createClass({
 
   addMasonryLayout: function() {
     var elem = document.querySelector('.grid');
-    var msnry = new Masonry(elem, {
-      itemSelector: '.grid-item',
-      columnWidth: 10,
-      gutter: 30
-    });
+    var msnry
 
     imagesLoaded('.giphy-view', function() {
-      msnry.layout();
+      msnry = new Masonry(elem, {
+        itemSelector: '.grid-item',
+        columnWidth: 10,
+        gutter: 30
+      });
     });
   },
 
@@ -24,33 +24,41 @@ var GiphyView = React.createClass({
     * Check if the giphys are ready. If not show spinner
     * else show giphys
     */
+    var gifs = [],
+        showDiv;
+
     if(!this.props.giphys.length) {
-      return (
-        <div className="load8">
-          <div className="loader">Loading...</div>
-        </div>
-      );
+      showDiv = ""
     }
     else {
-      var gifs = this.props.giphys.map(function(gif, index) {
+      showDiv = "show-div"
+      gifs = this.props.giphys.map(function(gif, index) {
         return (
           <div className="grid-item" key={'giphy-' + index}>
             <Giphy src={gif.images}/>
           </div>
         )
       });
+    }
 
-      //This is bad, find a better way!
-      setTimeout(function() {
-        this.addMasonryLayout()
-      }.bind(this), 500);
+    //This is bad, find a better way!
+    setTimeout(function() {
+      this.addMasonryLayout()
+    }.bind(this), 500);
 
-      return (
+    return (
+      <div className="mdl-cell mdl-cell--12-col giphy-view">
+        <div className="help-text">
+          <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
+        </div>
+        <div className={"load8 " + showDiv}>
+          <div className="loader">Loading...</div>
+        </div>
         <div className="grid">
           {gifs}
         </div>
-      );
-    }
+      </div>
+    );
   }
 });
 

@@ -34,9 +34,9 @@ var EGiphy = React.createClass({
 
   handleSubmit: function(refs) {
     var searchValue = React.findDOMNode(refs).value;
-    if(/^\w+\s*\w+$/.test(searchValue)) {
+    if(/^\s*[A-Za-z]+(?:\s+[A-Za-z]+)*\s*$/.test(searchValue)) {
       this.setState({giphys: []});
-      GiphyActions.searchForRequestedGiphys(React.findDOMNode(refs).value);
+      GiphyActions.searchForRequestedGiphys(searchValue);
     }
   },
 
@@ -47,15 +47,10 @@ var EGiphy = React.createClass({
 
   render: function() {
     var display;
+    // Check if the is internet connection, if not show
+    // error message, if connection load giphys
     if(this.state.connection) {
-      display = (
-        <div className="mdl-cell mdl-cell--12-col giphy-view">
-           <div className="help-text">
-              <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
-            </div>
-          <GiphyView giphys={this.state.giphys} />
-        </div>
-      )
+      display = <GiphyView giphys={this.state.giphys} />
     }
     else {
       display = (
@@ -87,6 +82,8 @@ var EGiphy = React.createClass({
               </div>
             </div>
           </main>
+        </div>
+        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" className="snackbar">
         </div>
       </div>
     );

@@ -31,7 +31,7 @@ var GiphyStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
-
+      //what the fuck is this!
       case "LOAD_TRENDING_GIPHYS":
         giphys = action.data;
         GiphyStore.emitLoadGiphys();
