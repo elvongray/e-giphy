@@ -7,6 +7,7 @@ var GiphyStore = require('./stores/GiphyStore');
 var GiphyView = require('./components/GiphyView');
 var SearchBar = require('./components/SearchBar');
 var GiphyActions = require('./actions/GiphyActions');
+var Notification = require('react-notification');
 
 require('../css/style.css');
 
@@ -15,7 +16,8 @@ var EGiphy = React.createClass({
   getInitialState: function() {
     return {
       giphys: [],
-      connection: true
+      connection: true,
+      isActive: false
     }
   },
 
@@ -24,6 +26,19 @@ var EGiphy = React.createClass({
       giphys:GiphyStore.getGiphys(),
       connection: true
     });
+  },
+
+  showSnackBar: function() {
+    if(!this.state.isActive){
+      this.setState({
+        isActive: true
+      });
+    }
+    else {
+      this.setState({
+        isActive: false
+      });
+    }
   },
 
   noConnection: function() {
@@ -50,7 +65,7 @@ var EGiphy = React.createClass({
     // Check if the is internet connection, if not show
     // error message, if connection load giphys
     if(this.state.connection) {
-      display = <GiphyView giphys={this.state.giphys} />
+      display = <GiphyView giphys={this.state.giphys} showSnackBar={this.showSnackBar}/>
     }
     else {
       display = (
@@ -81,9 +96,14 @@ var EGiphy = React.createClass({
                 </div>
               </div>
             </div>
+            <Notification
+              message="copied"
+              action="wtf"
+              isActive={this.state.isActive}
+              dismissAfter={2000}
+              onDismiss={this.showSnackBar}
+            />
           </main>
-        </div>
-        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" className="snackbar">
         </div>
       </div>
     );

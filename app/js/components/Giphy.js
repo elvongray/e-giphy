@@ -6,8 +6,7 @@ var Giphy = React.createClass({
 
   copyLikeToCliboard: function() {
     clipboard.writeText(this.props.src.original.url);
-    // This is bad, find a better way.
-    $('.err').stop().fadeIn(400).delay(3000).fadeOut(400);
+    this.props.showSnackBar();
   },
 
   render: function() {

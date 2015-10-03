@@ -32,7 +32,8 @@
     "material-design-lite": "^1.0.4",
     "menubar": "^2.2.1",
     "object-assign": "^1.0.0",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-notification": "^2.3.0"
   },
   "author": "Arinde Eniola",
   "license": "ISC"

@@ -19,13 +19,18 @@ var GiphyView = React.createClass({
     });
   },
 
+  showSnackBar: function() {
+    this.props.showSnackBar();
+  },
+
   render: function() {
     /*
     * Check if the giphys are ready. If not show spinner
     * else show giphys
     */
     var gifs = [],
-        showDiv;
+        showDiv
+        self = this;
 
     if(!this.props.giphys.length) {
       showDiv = ""
@@ -35,7 +40,7 @@ var GiphyView = React.createClass({
       gifs = this.props.giphys.map(function(gif, index) {
         return (
           <div className="grid-item" key={'giphy-' + index}>
-            <Giphy src={gif.images}/>
+            <Giphy src={gif.images} showSnackBar={self.showSnackBar}/>
           </div>
         )
       });
