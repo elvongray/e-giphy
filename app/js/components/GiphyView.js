@@ -29,14 +29,14 @@ var GiphyView = React.createClass({
     * else show giphys
     */
     var gifs = [],
-        showDiv
+        showSpinner,
         self = this;
 
     if(!this.props.giphys.length) {
-      showDiv = ""
+      showSpinner = ""
     }
     else {
-      showDiv = "show-div"
+      showSpinner = "show-div"
       gifs = this.props.giphys.map(function(gif, index) {
         return (
           <div className="grid-item" key={'giphy-' + index}>
@@ -46,7 +46,7 @@ var GiphyView = React.createClass({
       });
     }
 
-    //This is bad, find a better way!
+    // TODO: This is bad, find a better way!
     setTimeout(function() {
       this.addMasonryLayout()
     }.bind(this), 500);
@@ -56,7 +56,7 @@ var GiphyView = React.createClass({
         <div className="help-text">
           <span>CLICK ON IMAGE TO COPY LINK TO CLIPBOARD</span>
         </div>
-        <div className={"load8 " + showDiv}>
+        <div className={"load8 " + showSpinner}>
           <div className="loader">Loading...</div>
         </div>
         <div className="grid">

@@ -56,6 +56,8 @@ var EGiphy = React.createClass({
     })
   },
 
+  //handle giphy search request from the
+  // search bar
   handleSubmit: function(refs) {
     var searchValue = React.findDOMNode(refs).value;
     if(/^\s*[A-Za-z]+(?:\s+[A-Za-z]+)*\s*$/.test(searchValue)) {
@@ -79,8 +81,10 @@ var EGiphy = React.createClass({
     var display;
     // Check if the is internet connection, if not show
     // error message, if connection load giphys
+    // TODO: Make this dry during the next iteration
     if(this.state.connection) {
       // If no giphy is found, display message
+      // TODO: remove this shit, it is not DRY!
       if(this.state.noGiphyFound) {
         display = (
           <div className="mdl-cell mdl-cell--12-col giphy-view">

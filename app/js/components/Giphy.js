@@ -4,7 +4,7 @@ require('../../css/style.css');
 
 var Giphy = React.createClass({
 
-  copyLikeToCliboard: function() {
+  copyLinkToCliboard: function() {
     clipboard.writeText(this.props.src.original.url);
     this.props.showSnackBar();
   },
@@ -14,7 +14,7 @@ var Giphy = React.createClass({
     return (
       <img
         src={this.props.src.fixed_height_downsampled.url}
-        onClick={this.copyLikeToCliboard}
+        onClick={this.copyLinkToCliboard}
         className="giphy-image"/>
     );
   }
