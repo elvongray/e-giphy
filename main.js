@@ -1,5 +1,6 @@
 var BrowserWindow = require('browser-window');
 var menubar = require('menubar');
+var ipc = require('ipc');
 
 mbar = menubar({
   icon          : __dirname + '/app/assets/giphy_icon.png',
@@ -39,3 +40,8 @@ mbar.on('show', function() {
     debugWindow.webContents.send('message', 'load-giphys');
   }
 })
+
+//quit app
+ipc.on('quit-app', function() {
+  mbar.window.close();
+});

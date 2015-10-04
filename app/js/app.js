@@ -63,6 +63,11 @@ var EGiphy = React.createClass({
     }
   },
 
+  //trigger event to quit app when quit menu item is cliked
+  quitApp: function() {
+    ipc.send('quit-app');
+  },
+
   componentDidMount: function() {
     GiphyStore.addLoadGiphysListener(this.loadGiphys);
     GiphyStore.addNoConnectionListener(this.noConnection);
@@ -111,8 +116,9 @@ var EGiphy = React.createClass({
               </button>
               <ul htmlFor="menu1" className="mdl-menu mdl-js-menu">
                 <li className="mdl-menu__item" disabled>Egiphy v0.0.1</li>
-                <li className="mdl-menu__item">Stop</li>
-                <li className="mdl-menu__item">Pause</li>
+                <li className="mdl-menu__item">Report Bug</li>
+                <li className="mdl-menu__item">About</li>
+                <li className="mdl-menu__item" onClick={this.quitApp}>Quit</li>
               </ul>
               {/* menu tooltip */}
               <div className="mdl-tooltip" htmlFor="menu1">
