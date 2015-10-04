@@ -1,5 +1,6 @@
 var ipc = window.require('ipc');
 var isOnline = window.require('is-online');
+var electronOpenLinkInBrowser = window.require("electron-open-link-in-browser");
 
 var React = require('react');
 
@@ -63,7 +64,7 @@ var EGiphy = React.createClass({
     }
   },
 
-  //trigger event to quit app when quit menu item is cliked
+  //trigger event to quit app when quit menu item is clicked
   quitApp: function() {
     ipc.send('quit-app');
   },
@@ -79,6 +80,7 @@ var EGiphy = React.createClass({
     // Check if the is internet connection, if not show
     // error message, if connection load giphys
     if(this.state.connection) {
+      // If no giphy is found, display message
       if(this.state.noGiphyFound) {
         display = (
           <div className="mdl-cell mdl-cell--12-col giphy-view">
@@ -116,8 +118,12 @@ var EGiphy = React.createClass({
               </button>
               <ul htmlFor="menu1" className="mdl-menu mdl-js-menu">
                 <li className="mdl-menu__item" disabled>Egiphy v0.0.1</li>
-                <li className="mdl-menu__item">Report Bug</li>
-                <li className="mdl-menu__item">About</li>
+                <li className="mdl-menu__item"
+                    onClick={electronOpenLinkInBrowser.bind(this, "https://github.com/andela-earinde/e-giphy/issues")}>
+                    Report Bug</li>
+                <li className="mdl-menu__item"
+                    onClick={electronOpenLinkInBrowser.bind(this, "https://github.com/andela-earinde/e-giphy")}>
+                    About</li>
                 <li className="mdl-menu__item" onClick={this.quitApp}>Quit</li>
               </ul>
               {/* menu tooltip */}
@@ -137,7 +143,7 @@ var EGiphy = React.createClass({
             </div>
             {/* snack bar notification */}
             <Notification
-              message="Image Copied To ClipBoard"
+              message="Image Copied To Clipboard"
               isActive={this.state.isActive}
               dismissAfter={2000}
               onDismiss={this.showSnackBar}

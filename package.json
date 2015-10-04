@@ -23,6 +23,7 @@
     "webpack-dev-server": "^1.9.0"
   },
   "dependencies": {
+    "electron-open-link-in-browser": "^1.0.2",
     "electron-prebuilt": "^0.28.3",
     "flux": "^2.0.0",
     "giphy-api": "^1.0.8",
@@ -36,5 +37,5 @@
     "react-notification": "^2.3.0"
   },
   "author": "Arinde Eniola",
-  "license": "ISC"
+  "license": "MIT"
 }
