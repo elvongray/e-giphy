@@ -1,8 +1,9 @@
 var BrowserWindow = require('browser-window');
 var menubar = require('menubar');
 var ipc = require('ipc');
+var app = require('app');
 
-mbar = menubar({
+var mbar = menubar({
   icon          : __dirname + '/app/assets/giphy_icon.png',
   dir           : __dirname + '/app',
   preloadWindow : true,
@@ -43,5 +44,5 @@ mbar.on('show', function() {
 
 //quit app
 ipc.on('quit-app', function() {
-  mbar.window.close();
+  app.quit();
 });

@@ -50,6 +50,7 @@ var GiphyActions = {
         AppDispatcher.dispatch({actionType: "GIPHY_NOT_FOUND"});
       }
       else {
+        loadedGiphys = [];
         AppDispatcher.dispatch(action(res.data));
       }
     });
