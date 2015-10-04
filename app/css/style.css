@@ -13,6 +13,12 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.settings-button {
+  position: fixed;
+  top: 2%;
+  left: 70%;
+}
+
 .header-image {
   height: 50px;
   width: 150px;

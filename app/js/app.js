@@ -105,6 +105,19 @@ var EGiphy = React.createClass({
               <span className="mdl-layout-title">
                 <img src="assets/giphy.png" className="header-image"/>
               </span>
+              {/* menu button */}
+              <button id="menu1" className="mdl-button mdl-js-button mdl-button--icon settings-button">
+                <i className="material-icons">more_vert</i>
+              </button>
+              <ul htmlFor="menu1" className="mdl-menu mdl-js-menu">
+                <li className="mdl-menu__item" disabled>Egiphy v0.0.1</li>
+                <li className="mdl-menu__item">Stop</li>
+                <li className="mdl-menu__item">Pause</li>
+              </ul>
+              {/* menu tooltip */}
+              <div className="mdl-tooltip" htmlFor="menu1">
+                Settings
+              </div>
             </div>
           </header>
           <main className="mdl-layout__content">
@@ -116,6 +129,7 @@ var EGiphy = React.createClass({
                 </div>
               </div>
             </div>
+            {/* snack bar notification */}
             <Notification
               message="Image Copied To ClipBoard"
               isActive={this.state.isActive}
