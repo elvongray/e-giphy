@@ -15,12 +15,20 @@ var GiphyStore = assign({}, EventEmitter.prototype, {
     this.emit('no_connection');
   },
 
+  emitNoGiphyFound: function() {
+    this.emit('no_giphy_found');
+  },
+
   addLoadGiphysListener: function(callback) {
     this.on('load_giphys', callback);
   },
 
   addNoConnectionListener: function(callback) {
     this.on('no_connection', callback);
+  },
+
+  addNoGiphyFoundListener: function(callback) {
+    this.on('no_giphy_found', callback);
   },
 
   getGiphys: function() {
@@ -44,6 +52,10 @@ AppDispatcher.register(function(action) {
 
       case "NO_INTERNET_CONNECTION":
         GiphyStore.emitNoConnection();
+        break;
+
+      case "GIPHY_NOT_FOUND":
+        GiphyStore.emitNoGiphyFound();
         break;
 
       default:

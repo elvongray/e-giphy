@@ -17,14 +17,16 @@ var EGiphy = React.createClass({
     return {
       giphys: [],
       connection: true,
-      isActive: false
+      isActive: false,
+      noGiphyFound: false
     }
   },
 
   loadGiphys: function() {
     this.setState({
       giphys:GiphyStore.getGiphys(),
-      connection: true
+      connection: true,
+      noGiphyFound: false
     });
   },
 
@@ -47,6 +49,12 @@ var EGiphy = React.createClass({
     });
   },
 
+  noGiphyFound: function() {
+    this.setState({
+      noGiphyFound: true
+    })
+  },
+
   handleSubmit: function(refs) {
     var searchValue = React.findDOMNode(refs).value;
     if(/^\s*[A-Za-z]+(?:\s+[A-Za-z]+)*\s*$/.test(searchValue)) {
@@ -58,6 +66,7 @@ var EGiphy = React.createClass({
   componentDidMount: function() {
     GiphyStore.addLoadGiphysListener(this.loadGiphys);
     GiphyStore.addNoConnectionListener(this.noConnection);
+    GiphyStore.addNoGiphyFoundListener(this.noGiphyFound)
   },
 
   render: function() {
@@ -65,7 +74,18 @@ var EGiphy = React.createClass({
     // Check if the is internet connection, if not show
     // error message, if connection load giphys
     if(this.state.connection) {
-      display = <GiphyView giphys={this.state.giphys} showSnackBar={this.showSnackBar}/>
+      if(this.state.noGiphyFound) {
+        display = (
+          <div className="mdl-cell mdl-cell--12-col giphy-view">
+            <div className="help-text">
+              <span>NO GIPHY FOUND</span>
+            </div>
+          </div>
+        );
+      }
+      else {
+        display = <GiphyView giphys={this.state.giphys} showSnackBar={this.showSnackBar}/>
+      }
     }
     else {
       display = (
@@ -97,8 +117,7 @@ var EGiphy = React.createClass({
               </div>
             </div>
             <Notification
-              message="copied"
-              action="wtf"
+              message="Image Copied To ClipBoard"
               isActive={this.state.isActive}
               dismissAfter={2000}
               onDismiss={this.showSnackBar}

@@ -46,7 +46,12 @@ var GiphyActions = {
       rating: 'g',
       fmt: 'json'
     },function(err, res) {
-      AppDispatcher.dispatch(action(res.data));
+      if(!res.data.length) {
+        AppDispatcher.dispatch({actionType: "GIPHY_NOT_FOUND"});
+      }
+      else {
+        AppDispatcher.dispatch(action(res.data));
+      }
     });
   },
 
