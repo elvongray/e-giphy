@@ -36,6 +36,7 @@ var GiphyStore = assign({}, EventEmitter.prototype, {
   }
 });
 
+// Register store with dispatcher
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {

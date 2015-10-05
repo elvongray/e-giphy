@@ -19,6 +19,7 @@ var GiphyView = React.createClass({
     });
   },
 
+  // Bubble show snackbar event to the parent
   showSnackBar: function() {
     this.props.showSnackBar();
   },

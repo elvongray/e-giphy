@@ -56,7 +56,7 @@ var EGiphy = React.createClass({
     })
   },
 
-  //handle giphy search request from the
+  // handle giphy search request from the
   // search bar
   handleSubmit: function(refs) {
     var searchValue = React.findDOMNode(refs).value;
@@ -66,7 +66,7 @@ var EGiphy = React.createClass({
     }
   },
 
-  //trigger event to quit app when quit menu item is clicked
+  // trigger event to quit app when quit menu item is clicked
   quitApp: function() {
     ipc.send('quit-app');
   },
@@ -121,7 +121,7 @@ var EGiphy = React.createClass({
                 <i className="material-icons">more_vert</i>
               </button>
               <ul htmlFor="menu1" className="mdl-menu mdl-js-menu">
-                <li className="mdl-menu__item" disabled>Egiphy v0.0.1</li>
+                <li className="mdl-menu__item" disabled>Egiphy v0.1.0</li>
                 <li className="mdl-menu__item"
                     onClick={electronOpenLinkInBrowser.bind(this, "https://github.com/andela-earinde/e-giphy/issues")}>
                     Report Bug</li>
@@ -163,7 +163,7 @@ var EGiphy = React.createClass({
 // when the menu is displayed
 ipc.on('message', function(message) {
   if(message === 'load-giphys') {
-    //check if there is internet connection
+    // check if there is internet connection
     isOnline(function(err, online) {
       if(online){
         GiphyActions.loadTrendingGiphys();
